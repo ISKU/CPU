@@ -7,15 +7,12 @@ module Memory (clk, op, addr, data);
 	input op; // READ or WRITE
 	input [15:0] addr;
 	output [15:0] data;
+	wire [15:0] data;
 
 	/* array in Verilog; simulation only */
-	reg [7:0] mem [65535:0]; // 65536 entries of 8-bit entry
+	reg [7:0] mem [0:1000]; // 1000 entries of 8-bit entry
 	
 	/* Read */
-	assign data = {mem[addr+1], mem[addr]}; // 16-bit little endian
+	assign data = {mem[addr], mem[addr+1]};
 	
-	/* Write */
-	always @(posedge clk)
-		if (op == `WRITE) 
-			{mem[addr+1], mem[addr]} <= data;
 endmodule 

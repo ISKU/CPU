@@ -44,7 +44,7 @@ module Decoder_OP(instr, unary, imm, aluop, setcc, rD, rA, rB, immB, wben);
 	output [2:0] rD;
 	output [2:0] rA;
 	output [2:0] rB;
-	output [4:0] immB;
+	output [3:0] immB;
 	output wben;
 	
 	wire [4:0] opcode_i;
@@ -55,7 +55,7 @@ module Decoder_OP(instr, unary, imm, aluop, setcc, rD, rA, rB, immB, wben);
 	reg [2:0] rD;
 	reg [2:0] rA;
 	reg [2:0] rB;
-	reg [4:0] immB;
+	reg [3:0] immB;
 	reg wben;
 	
 	assign opcode_i = {instr[15:12], instr[11]}; // {opcode, imm}
@@ -70,7 +70,7 @@ module Decoder_OP(instr, unary, imm, aluop, setcc, rD, rA, rB, immB, wben);
 			`OP_MOV: {unary, imm, aluop, setcc, rD, rA, rB, immB, wben} =
 				{1'b1, 1'b0, `ALU_ADD, instr[10], instr[9:7], instr[6:4], instr[3:1], 4'bx, 1'b1};
 			`OP_MOVI: {unary, imm, aluop, setcc, rD, rA, rB, immB, wben} =
-				{1'b1, 1'b1, `ALU_ADD, instr[10], instr[9:7], instr[6:4], 3'bx, instr[3:0], 1'b1};
+				{1'b1, 1'b1, `ALU_ADD, instr[10], instr[9:7], 3'bx, 3'bx, instr[3:0], 1'b1};
 
 			`OP_SUB: {unary, imm, aluop, setcc, rD, rA, rB, immB, wben} =
 				{1'b0, 1'b0, `ALU_SUB, instr[10], instr[9:7], instr[6:4], instr[3:1], 4'bx, 1'b1};

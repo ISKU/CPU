@@ -53,7 +53,7 @@ module ALU (result, cc, valA, valB, aluop);
 	
 	// 덧셈 or 뺄셈
 	assign sub = (aluop == `ALU_SUB) ? 1'b1 : 1'b0;
-	assign svalB = sub ? ~valB : valB; // 뺄셈일 경우 1의 보수를 취한다
+	assign svalB = (aluop == `ALU_SUB) ? ~valB : valB; // 뺄셈일 경우 1의 보수를 취한다
 	KoggeStoneAdder myAdder(add_co, add_out, valA, svalB, sub); // KoggeStoneAdder를 통한 덧셈 또는 뺄셈(1(sub)의 더하여 2의보수)
 
 	// 곱셈
@@ -81,7 +81,7 @@ module ALU (result, cc, valA, valB, aluop);
 		(aluop == `ALU_MULT) ? mul_co : // Multiply
 		1'b0;
 	assign V = // Overflow 확인
-		(aluop == `ALU_SHL) ? 1'b1 : // shift left
+		(aluop == `ALU_SHL) ? valA[15] ^ shift_out[15] : // shift left
 		(aluop == `ALU_ADD) ? // Add
 			(~valA[15] & ~svalB[15] & add_out[15]) | /* (-) + (-) = (+) */ 
 			(valA[15] & svalB[15] & ~add_out[15]) : /* (+) + (+) = (-) */
