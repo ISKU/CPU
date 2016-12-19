@@ -11,3 +11,13 @@ simulation
 *.txt
 *.rpt
 *.bak
+
+
+# JAVA
+.metadata
+.recommenders
+.settings
+bin
+RemoteSystemsTempFiles
+.classpath
+.project
