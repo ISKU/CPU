@@ -1,7 +1,7 @@
 # CPU
 Design 16 bit CPU by Verilog
 
-###Instruction Set Architecture
+### Instruction Set Architecture
 ![Alt Text](https://imagizer.imageshack.us/v2/821x174q90/922/5YMcne.png)
 
 ![Alt Text](https://imagizer.imageshack.us/v2/821x90q90/923/A8oQ1J.png)
